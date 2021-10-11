@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Logo from "./footer_logo.png";
 import finalEstimate from "./script"
-import moment from "moment/moment.js"
+import moment from "moment"
 
 const App = () => {
 
@@ -51,7 +51,7 @@ if(text && lang){
   const message = 'Будет готово:'
   setPrice(resultedEstimate[0]);
   setDeliveryTime(message + " " + moment(resultedEstimate[1]).format('lll'))
-}else{
+} else{
   setPrice(0)
   setDeliveryTime('')
 }
@@ -79,11 +79,12 @@ const onLangChange = (event) => {
         <form className='input-form'>
         <div className='input-box'>
           <select className='lang-choice' onClick={(event)=>onServiceChange(event)}>
-            <option disabled>Услуга</option>
+            <option value='' selected disabled>Услуга</option>
                {getServices}
             </select> 
-          <textarea type='text' name='text' className='user-input' id='message-input' placeholder="Вставьте текст или загрузите файл" cols="50" rows="7" onChange={(event)=>onChangeText(event)}
-          ></textarea>
+          <textarea type='text' name='text' className='user-input' id='message-input' placeholder="Вставьте текст или загрузите файл" cols="50" rows="7" value={text} onChange={(event)=>onChangeText(event)}
+          >
+          </textarea>
           <div className="upload">
             <input type="file" placeholder="Загрузите файл" />
         </div>
@@ -95,7 +96,7 @@ const onLangChange = (event) => {
         <div className='service-info'>
           <input className='user-info' id='comment' type="text" placeholder='Комментарий к заказу или ссылка' />
           <select className="lang-choice" onChange={(event)=>onLangChange(event)}>
-            <option>Выберите язык</option>
+            <option value='' selected disabled>Выберите язык</option>
                {getLanguages}
             </select> 
         </div>

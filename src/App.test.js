@@ -1,5 +1,5 @@
 import { getPriceEstimate, getTimeEstimate, getDeliveryTime } from './script';
-import moment from "moment/moment.js"
+import moment from "moment"
 
 describe('getPriceEstimate test', () => {
   test('return correct price', () => {

@@ -1,4 +1,4 @@
-import moment from "moment/moment.js";
+import moment from "moment";
 
 const hourTime = 3600000;
 
@@ -29,12 +29,15 @@ export const getTimeEstimate = (value, lang) => {
     return timeEstimate;
 }
 
-export const getDeliveryTime = (time, getEstimate) => {
-    getEstimate = moment();
-    const startWork = moment(getEstimate).startOf('day').hour(10).minute(0).valueOf();
-    const endWork = moment(getEstimate).startOf('day').hour(19).minute(0).valueOf();
+export const getDeliveryTime = (time, estimate) => {
+    estimate = moment()
+    const getEstimate = estimate;
+    
 
     while(true) {
+
+        const startWork = moment(getEstimate).startOf('day').hour(10).minute(0).valueOf();
+        const endWork = moment(getEstimate).startOf('day').hour(19).minute(0).valueOf();
 
         if(getEstimate.valueOf() > endWork) {
             getEstimate.add(1,'days').set({hours:'10',minutes:'00'})
@@ -59,8 +62,8 @@ export const getDeliveryTime = (time, getEstimate) => {
 
 }
 
-   const finalEstimate = (value,lang,formatTime, estimate) => {
-   const checkedType = checkTypeforEstimate(formatTime);
+   const finalEstimate = (value,lang,formatPrice, estimate) => {
+   const checkedType = checkTypeforEstimate(formatPrice);
    const estimatedPrice = getPriceEstimate(value,lang)*checkedType;
    const estimatedDuration = getTimeEstimate(value,lang)*checkedType;
    const estimatedWorkDone = getDeliveryTime(estimatedDuration, estimate)
