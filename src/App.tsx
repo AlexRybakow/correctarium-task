@@ -71,18 +71,18 @@ if(text && lang){
 }
 },[text, lang])
 
-const onChangeText = (event: any) => {
+const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
   setText(event.target.value)
 }
 
-const onServiceChange = (event: any) => {
-  setService(event.target.service)
+const onServiceChange = (event: React.MouseEvent<HTMLSelectElement>) => {
+  setService(event.currentTarget.value)
 }
 
 console.log(service)
 
-const onLangChange = (event: any) => {
-  setLang(event.target.value)
+const onLangChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  setLang(event.currentTarget.value)
 }
 
  return (
@@ -96,9 +96,8 @@ const onLangChange = (event: any) => {
             <option value='' selected disabled>Услуга</option>
                {getServices}
             </select> 
-          <textarea name='text' className='user-input' id='message-input' placeholder="Вставьте текст или загрузите файл" value={text} onChange={(event)=> onChangeText(event)}
-          >
-          </textarea>
+          <input type='text' className='user-input' id='message-input' placeholder="Вставьте текст или загрузите файл" value={text} onChange={onChangeText}
+          />
           <div className="upload">
             <input type="file" placeholder="Загрузите файл" />
         </div>

@@ -35,6 +35,7 @@ h2 {
 
 .user-input {
   width:500px;
+  height: 200px;
 }
 
 .lang-choice, .user-input, .general-user-info {
