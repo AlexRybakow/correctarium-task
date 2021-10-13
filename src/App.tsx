@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Logo from "./footer_logo.png";
+import Logo from "./assets/footer_logo.png";
 import finalEstimate from "./script"
 import moment from "moment"
+import { ServiceType, LangType } from "./types/types"
 
-type ServiceType = { 
-	edit: string;
-  translate: string;
-
-};
-
-type LangType = {
-	ukr: string;
-	rus: string;
-	eng: string;
-	nativeEng: string;
-};
 
 const App: React.FC = () => {
 
