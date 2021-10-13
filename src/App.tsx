@@ -4,19 +4,32 @@ import Logo from "./footer_logo.png";
 import finalEstimate from "./script"
 import moment from "moment"
 
-const App = () => {
+type ServiceType = { 
+	edit: string;
+  translate: string;
 
-  const services = {
+};
+
+type LangType = {
+	ukr: string;
+	rus: string;
+	eng: string;
+	nativeEng: string;
+};
+
+const App: React.FC = () => {
+
+  const services:ServiceType[] = [{
     edit: 'Редактирование',
     translate: 'Перевод'
-  }
+  }]
   
-  const languages = {
+  const languages:LangType[] = [{
     ukr: 'Украинский',
     rus: 'Русский',
     eng: 'Английский',
     nativeEng: 'Английский(носитель)'
-  }
+  }]
 
  const format = 'docx';
 
@@ -27,7 +40,7 @@ const App = () => {
  const [deliveryTime, setDeliveryTime] = useState('')
  
 
-const OptionChoice = (props) => {
+const OptionChoice = (props:any) => {
   return <option value={props.name.propName} >
     {props.name.value}
     </option>
@@ -45,6 +58,7 @@ const getLanguages = Object.keys(languages).map(propName => {
   })
 
 
+
 useEffect(() => {
 if(text && lang){
   const resultedEstimate = finalEstimate(text.length, lang, format)
@@ -52,22 +66,22 @@ if(text && lang){
   setPrice(resultedEstimate[0]);
   setDeliveryTime(message + " " + moment(resultedEstimate[1]).format('lll'))
 } else{
-  setPrice(0)
+  setPrice('')
   setDeliveryTime('')
 }
-},[text,lang])
+},[text, lang])
 
-const onChangeText = (event) => {
+const onChangeText = (event: any) => {
   setText(event.target.value)
 }
 
-const onServiceChange = (event) => {
+const onServiceChange = (event: any) => {
   setService(event.target.service)
 }
 
 console.log(service)
 
-const onLangChange = (event) => {
+const onLangChange = (event: any) => {
   setLang(event.target.value)
 }
 
@@ -82,7 +96,7 @@ const onLangChange = (event) => {
             <option value='' selected disabled>Услуга</option>
                {getServices}
             </select> 
-          <textarea type='text' name='text' className='user-input' id='message-input' placeholder="Вставьте текст или загрузите файл" cols="50" rows="7" value={text} onChange={(event)=>onChangeText(event)}
+          <textarea name='text' className='user-input' id='message-input' placeholder="Вставьте текст или загрузите файл" value={text} onChange={(event)=> onChangeText(event)}
           >
           </textarea>
           <div className="upload">
@@ -95,7 +109,7 @@ const onLangChange = (event) => {
         </div>
         <div className='service-info'>
           <input className='user-info' id='comment' type="text" placeholder='Комментарий к заказу или ссылка' />
-          <select className="lang-choice" onChange={(event)=>onLangChange(event)}>
+          <select className="lang-choice" onChange={(event) => onLangChange(event)}>
             <option value='' selected disabled>Выберите язык</option>
                {getLanguages}
             </select> 
@@ -122,7 +136,7 @@ const onLangChange = (event) => {
         </div>
         <div className="contact-us">
          <p>Напишите нам:</p>
-         <a href="mailto:manager@correctarium.com" class="contact-email">manager@correctarium.com</a>
+         <a href="mailto:manager@correctarium.com" className="contact-email">manager@correctarium.com</a>
         </div>
       </footer>
     </div>

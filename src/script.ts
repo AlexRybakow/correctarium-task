@@ -4,7 +4,7 @@ const hourTime = 3600000;
 
 const fileType = ['doc', 'docx', 'rtf']
 
-const checkTypeforEstimate = (type) => {
+const checkTypeforEstimate = (type:any) => {
     if (fileType.includes(type)) {
         return 1
     } else {
@@ -12,16 +12,16 @@ const checkTypeforEstimate = (type) => {
     }
 }
 
-export const getPriceEstimate = (value, lang) => {
+export const getPriceEstimate = (value:number, lang:string):number => {
     const cyrillicLetters = 0.05;
     const latinLetters = 0.12;
     const symbolPrice = lang === 'eng' ? latinLetters : cyrillicLetters;
     const textEstimate = Math.max(1000, value) * symbolPrice;
 
-    return textEstimate.toFixed(2)
+    return textEstimate;
 }
 
-export const getTimeEstimate = (value, lang) => {
+export const getTimeEstimate = (value:number, lang:string) => {
     const cyrillicSymbolsPerHour = 1333;
     const latinSymbolsPerHour = 333;
     const timePrice = lang === 'eng' ? latinSymbolsPerHour : cyrillicSymbolsPerHour;
@@ -29,7 +29,7 @@ export const getTimeEstimate = (value, lang) => {
     return timeEstimate;
 }
 
-export const getDeliveryTime = (time, getEstimate) => {
+export const getDeliveryTime = (time:number, getEstimate:any) => {
     getEstimate = moment()
     const startWork = moment(getEstimate).startOf('day').hour(10).minute(0).valueOf();
     const endWork = moment(getEstimate).startOf('day').hour(19).minute(0).valueOf();
@@ -56,7 +56,7 @@ export const getDeliveryTime = (time, getEstimate) => {
     }
 }
 
-const finalEstimate = (value, lang, formatPrice, getEstimate) => {
+const finalEstimate = (value:number, lang:string, formatPrice:any, getEstimate?:any) => {
     const checkedType = checkTypeforEstimate(formatPrice);
     const estimatedPrice = getPriceEstimate(value, lang) * checkedType;
     const estimatedDuration = getTimeEstimate(value, lang) * checkedType;
