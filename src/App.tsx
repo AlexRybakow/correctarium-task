@@ -8,17 +8,17 @@ import { ServiceType, LangType } from "./types/types"
 
 const App: React.FC = () => {
 
-  const services:ServiceType[] = [{
+  const services:ServiceType = {
     edit: 'Редактирование',
     translate: 'Перевод'
-  }]
+  }
   
-  const languages:LangType[] = [{
+  const languages:LangType = {
     ukr: 'Украинский',
     rus: 'Русский',
     eng: 'Английский',
     nativeEng: 'Английский(носитель)'
-  }]
+  }
 
  const format = 'docx';
 
@@ -55,7 +55,7 @@ if(text && lang){
   setPrice(resultedEstimate[0]);
   setDeliveryTime(message + " " + moment(resultedEstimate[1]).format('lll'))
 } else{
-  setPrice('')
+  setPrice('0')
   setDeliveryTime('')
 }
 },[text, lang])
